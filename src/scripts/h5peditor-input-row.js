@@ -13,7 +13,7 @@ class InputRow extends H5P.EventDispatcher {
 
     this.parent = parent;
     this.field = field;
-    this.params = params;
+    this.params = params || {};
     this.setValue = setValue;
 
     // Callbacks to call when parameters change
