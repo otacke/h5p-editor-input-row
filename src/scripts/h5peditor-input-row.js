@@ -13,7 +13,7 @@ class InputRow extends H5P.EventDispatcher {
 
     this.parent = parent;
     this.field = field;
-    this.params = params || {};
+    this.params = params = {};
     this.setValue = setValue;
 
     // Callbacks to call when parameters change
@@ -60,6 +60,9 @@ class InputRow extends H5P.EventDispatcher {
     // Fill Row with children
     this.children = [];
     this.field.fields.forEach(field => {
+      // Set default values if available
+      this.params[field.name] = this.params[field.name] || field.default;
+
       const child = new H5PEditor.widgets[field.type](this, field, this.params[field.name], (field, value) => {
         // Update values
         this.params[field.name] = value;
