@@ -127,7 +127,10 @@ class InputRow extends H5P.EventDispatcher {
    * @return {boolean} True, if current value is valid, else false.
    */
   validate() {
-    return this.children.every(child => child.validate());
+    return this.children.every((child) => {
+      const valid = child.validate();
+      return (typeof valid !== 'undefined' && valid !== false);
+    });
   }
 
   /**
