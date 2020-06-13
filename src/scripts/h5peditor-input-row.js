@@ -83,9 +83,10 @@ class InputRow extends H5P.EventDispatcher {
       // Move error fields into global error field
       this.$errors.append(child.$errors);
 
-      // Change attribute to HTML5 number input and use attributes
-      if (child.field.type === 'number' && this.field.inputrow.HTML5NumberField) {
-        {
+      if (child.field.type === 'number') {
+
+        // Change attribute to HTML5 number input and use attributes
+        if (this.field.inputrow.HTML5NumberField || child.field.inputRow && child.field.inputrow.HTML5NumberField) {
           child.$input.get(0).setAttribute('type', 'number');
           if (child.field.min) {
             child.$input.get(0).setAttribute('min', child.field.min);
@@ -99,6 +100,15 @@ class InputRow extends H5P.EventDispatcher {
           if (!this.params[child.field.name] && child.field.default) {
             child.$input.get(0).setAttribute('value', child.field.default);
           }
+        }
+
+        // Trigger change event on enter
+        if (this.field.inputrow.changedOnEnter || child.field.inputrow && child.field.inputrow.changedOnEnter) {
+          child.$input.get(0).addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+              child.$input.change();
+            }
+          });
         }
       }
 
