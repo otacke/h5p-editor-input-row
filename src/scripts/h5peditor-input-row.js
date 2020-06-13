@@ -16,6 +16,8 @@ class InputRow extends H5P.EventDispatcher {
     this.params = params = {};
     this.setValue = setValue;
 
+    this.field.inputrow = this.field.inputrow || {};
+
     // Callbacks to call when parameters change
     this.changes = [];
 
@@ -81,20 +83,22 @@ class InputRow extends H5P.EventDispatcher {
       // Move error fields into global error field
       this.$errors.append(child.$errors);
 
-      // Change attribute to real number input and use attributes
-      if (child.field.type === 'number') {
-        child.$input.get(0).setAttribute('type', 'number');
-        if (child.field.min) {
-          child.$input.get(0).setAttribute('min', child.field.min);
-        }
-        if (child.field.max) {
-          child.$input.get(0).setAttribute('max', child.field.max);
-        }
-        if (child.field.step) {
-          child.$input.get(0).setAttribute('step', child.field.step);
-        }
-        if (!this.params[child.field.name] && child.field.default) {
-          child.$input.get(0).setAttribute('value', child.field.default);
+      // Change attribute to HTML5 number input and use attributes
+      if (child.field.type === 'number' && this.field.inputrow.HTML5NumberField) {
+        {
+          child.$input.get(0).setAttribute('type', 'number');
+          if (child.field.min) {
+            child.$input.get(0).setAttribute('min', child.field.min);
+          }
+          if (child.field.max) {
+            child.$input.get(0).setAttribute('max', child.field.max);
+          }
+          if (child.field.step) {
+            child.$input.get(0).setAttribute('step', child.field.step);
+          }
+          if (!this.params[child.field.name] && child.field.default) {
+            child.$input.get(0).setAttribute('value', child.field.default);
+          }
         }
       }
 
