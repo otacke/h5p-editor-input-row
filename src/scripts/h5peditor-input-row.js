@@ -2,7 +2,7 @@
 class InputRow extends H5P.EventDispatcher {
 
   /**
-   * @constructor
+   * @class
    * @param {object} parent Parent element in semantics.
    * @param {object} field Semantics field properties.
    * @param {object} params Parameters entered in editor form.
@@ -61,7 +61,7 @@ class InputRow extends H5P.EventDispatcher {
 
     // Fill Row with children
     this.children = [];
-    this.field.fields.forEach(field => {
+    this.field.fields.forEach((field) => {
       // Set default values if available
       this.params[field.name] = this.params[field.name] || field.default;
 
@@ -72,7 +72,7 @@ class InputRow extends H5P.EventDispatcher {
 
         // Allow other widgets to listen to updates
         this.trigger('changed', this.params);
-        this.changes.forEach(callback => {
+        this.changes.forEach((callback) => {
           callback(this.params);
         });
       });
@@ -134,7 +134,7 @@ class InputRow extends H5P.EventDispatcher {
 
   /**
    * Validate current values. Invoked by H5P core.
-   * @return {boolean} True, if current value is valid, else false.
+   * @returns {boolean} True, if current value is valid, else false.
    */
   validate() {
     return this.children.every((child) => {
