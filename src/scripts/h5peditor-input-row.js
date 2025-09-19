@@ -26,7 +26,7 @@ class InputRow extends H5P.EventDispatcher {
 
     // Container
     this.$container = H5P.jQuery('<fieldset>', {
-      class: `field group field-name-${this.field.name} h5peditor-input-row expanded`
+      class: `field group field-name-${this.field.name} h5peditor-input-row expanded`,
     });
 
     // Title
@@ -55,7 +55,7 @@ class InputRow extends H5P.EventDispatcher {
 
     // Errors field
     this.$errors = H5P.jQuery('<div>', {
-      class: 'h5p-errors'
+      class: 'h5p-errors',
     });
     content.appendChild(this.$errors.get(0));
 
